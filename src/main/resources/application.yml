@@ -5,6 +5,14 @@ spring:
   application:
     name: API-GATEWAY
 
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: http://localhost:9000/auth-server/oauth2/introspect
+          client-id: client
+          client-secret: secret
+
 eureka:
   instance:
     prefer-ip-address: true
