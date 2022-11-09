@@ -1,18 +1,22 @@
 package com.mystays.APIGateway.controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GatewayController {
     @GetMapping("/authenticateFallback")
-    public String defaultMessage()
+    public ResponseEntity<String> defaultMessage()
     {
-        return "There were some error in connecting Authorization server. Please try again later.";
+        ResponseEntity e = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return e;
     }
 
     @GetMapping("/hotelSearchServiceFallback")
-    public String hotelSearchServiceFallback()
+    public ResponseEntity<String> hotelSearchServiceFallback()
     {
-        return "There were some error in connecting Hotel Search Service. Please try again later.";
+        ResponseEntity r = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return r;
     }
 }
