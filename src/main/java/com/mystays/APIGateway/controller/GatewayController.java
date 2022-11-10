@@ -1,4 +1,5 @@
 package com.mystays.APIGateway.controller;
+import com.mystays.APIGateway.constants.Errors;
 import com.mystays.APIGateway.model.ErrorResponse;
 import com.mystays.APIGateway.util.ResponseEntityBuilder;
 import org.springframework.http.HttpStatus;
@@ -11,24 +12,24 @@ public class GatewayController {
     @GetMapping("/authenticateFallback")
     public ResponseEntity<ErrorResponse> defaultMessage()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, "Authenticate failure", "1000");
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.DEFAULT));
     }
 
     @GetMapping("/hotelSearchServiceFallback")
     public ResponseEntity<ErrorResponse> hotelSearchServiceFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, "Hotel Search Service unavailable", "1001");
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.HOTEL_SEARCH_SERVICE));
     }
 
     @GetMapping("/accountServiceFallback")
     public ResponseEntity<ErrorResponse> accountServiceFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, "Account Service unavailable", "1002");
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.ACCOUNT_SERVICE));
     }
 
     @GetMapping("/googleApiFallback")
     public ResponseEntity<ErrorResponse> googleApiFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, "Google API unavailable", "1003");
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.GOOGLE_API));
     }
 }
