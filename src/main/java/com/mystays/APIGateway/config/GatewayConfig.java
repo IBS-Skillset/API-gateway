@@ -28,9 +28,9 @@ public class GatewayConfig {
                         .filters(f -> f.circuitBreaker(c->c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback")))
                         .uri("lb://HOTEL-SEARCH-API"))
                 .route(p->p.path("/account/**")
-                        .uri("http://localhost:8089"))
+                        .uri("lb://ACCOUNT-SERVICE"))
                 .route(p->p.path("/googleApi/**")
-                        .uri("http://localhost:8081"))
+                        .uri("lb://GOOGLE-API"))
                 .build();
     }
     @Bean
