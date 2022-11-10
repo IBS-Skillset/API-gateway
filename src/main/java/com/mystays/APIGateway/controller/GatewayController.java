@@ -12,24 +12,24 @@ public class GatewayController {
     @GetMapping("/authenticateFallback")
     public ResponseEntity<ErrorResponse> defaultMessage()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.DEFAULT));
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.DEFAULT.getMessage()));
     }
 
     @GetMapping("/hotelSearchServiceFallback")
     public ResponseEntity<ErrorResponse> hotelSearchServiceFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.HOTEL_SEARCH_SERVICE));
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.HOTEL_SEARCH_SERVICE.getMessage()));
     }
 
     @GetMapping("/accountServiceFallback")
     public ResponseEntity<ErrorResponse> accountServiceFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.ACCOUNT_SERVICE));
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.ACCOUNT_SERVICE.getMessage()));
     }
 
     @GetMapping("/googleApiFallback")
     public ResponseEntity<ErrorResponse> googleApiFallback()
     {
-        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.GOOGLE_API));
+        return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.GOOGLE_API.getMessage()));
     }
 }
