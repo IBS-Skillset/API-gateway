@@ -23,14 +23,13 @@ public class GatewayConfig {
                 .route(p ->p.path("/auth-server/authenticate/**")
                         .filters(f -> f.circuitBreaker(c->c.setName("authenticate").setFallbackUri("/authenticateFallback")))
                         .uri("lb://AUTHORIZATION-SERVER"))
+
                 .route(p ->p.path("/hotel-search-service/api/**")
                         .filters(f -> f.circuitBreaker(c->c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback")))
                         .uri("lb://HOTEL-SEARCH-API"))
                 .route(p->p.path("/account/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("AccountService").setFallbackUri("/accountServiceFallback")))
                         .uri("lb://ACCOUNT-SERVICE"))
                 .route(p->p.path("/googleApi/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("GoogleApi").setFallbackUri("/googleApiFallback")))
                         .uri("lb://GOOGLE-API"))
                 .build();
     }
