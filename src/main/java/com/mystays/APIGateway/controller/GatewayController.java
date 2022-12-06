@@ -15,4 +15,10 @@ public class GatewayController {
     {
         return "There were some error in connecting Hotel Search Service. Please try again later.";
     }
+
+    @GetMapping("/hotelBookServiceFallback")
+    public String hotelBookServiceFallback()
+    {
+        return "There were some error in connecting Hotel Search Service. Please try again later.";
+    }
 }
