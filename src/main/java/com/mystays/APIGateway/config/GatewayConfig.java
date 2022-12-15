@@ -23,7 +23,6 @@ public class GatewayConfig {
                 .route(p ->p.path("/auth-server/authenticate/**")
                         .filters(f -> f.circuitBreaker(c->c.setName("authenticate").setFallbackUri("/authenticateFallback")))
                         .uri("lb://AUTHORIZATION-SERVER"))
-
                 .route(p ->p.path("/hotel-search-service/api/**")
                         .filters(f -> f.circuitBreaker(c->c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback")))
                         .uri("lb://HOTEL-SEARCH-API"))
@@ -34,6 +33,9 @@ public class GatewayConfig {
                         .uri("lb://ACCOUNT-SERVICE"))
                 .route(p->p.path("/googleApi/**")
                         .uri("lb://GOOGLE-API"))
+                .route(p->p.path("/book-query/**")
+                        .filters(f -> f.circuitBreaker(c->c.setName("HotelBookQuery").setFallbackUri("/hotelBookQueryFallback")))
+                        .uri("lb://HOTEL-BOOK-QUERY"))
                 .build();
     }
     @Bean
