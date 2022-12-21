@@ -36,6 +36,9 @@ public class GatewayConfig {
                 .route(p->p.path("/book-query/**")
                         .filters(f -> f.circuitBreaker(c->c.setName("HotelBookQuery").setFallbackUri("/hotelBookQueryFallback")))
                         .uri("lb://HOTEL-BOOK-QUERY"))
+                .route(p->p.path("/hotel-book/**")
+                        .filters(f -> f.circuitBreaker(c->c.setName("HotelBookCmd").setFallbackUri("/hotelBookCmdFallback")))
+                        .uri("lb://HOTEL-BOOK-CMD"))
                 .build();
     }
     @Bean
