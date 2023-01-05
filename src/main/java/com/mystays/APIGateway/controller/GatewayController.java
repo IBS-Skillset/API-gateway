@@ -32,4 +32,22 @@ public class GatewayController {
     {
         return ResponseEntityBuilder.build(HttpStatus.OK, String.valueOf(Errors.GOOGLE_API.getMessage()));
     }
+
+    @GetMapping("/hotelBookServiceFallback")
+    public String hotelBookServiceFallback()
+    {
+        return "There were some error in connecting Hotel Search Service. Please try again later.";
+    }
+
+    @GetMapping("/hotelBookQueryFallback")
+    public String hotelBookQueryFallback()
+    {
+        return "There were some error in connecting Hotel Book Query. Please try again later.";
+    }
+
+    @GetMapping("/hotelBookCmdFallback")
+    public String hotelBookCmdFallback()
+    {
+        return "There were some error in connecting Hotel Book Command. Please try again later.";
+    }
 }

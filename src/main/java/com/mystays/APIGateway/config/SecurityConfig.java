@@ -16,7 +16,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 
         http.csrf().disable().authorizeExchange()
-                .pathMatchers("/account/**").permitAll()
+                .pathMatchers("/account/api/signup").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
