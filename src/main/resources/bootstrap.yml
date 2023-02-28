@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: API-GATEWAY
-  cloud:
-    config:
-      enabled: true
-      uri: http://localhost:9296/config-server
