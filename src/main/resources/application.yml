@@ -23,7 +23,7 @@ spring:
     oauth2:
       resourceserver:
         opaquetoken:
-          introspection-uri: http://localhost:9000/auth-server/oauth2/introspect
+          introspection-uri: ${AUTH_SERVER:http://localhost:9000/auth-server}/oauth2/introspect
           client-id: client
           client-secret: secret
 management:
@@ -62,4 +62,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${eureka.service-url.default}
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka/}
