@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: beta-app
+  labels:
+    app.kubernetes.io/name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api-gateway
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: api-gateway
+    spec:
+      containers:
+        - name: api-gateway-service
+          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:3cd8b29
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 9192
+          env:
+            - name: HOST_IP
+              value: authserver.beta-app
