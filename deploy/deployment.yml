@@ -17,12 +17,16 @@ spec:
         app.kubernetes.io/name: api-gateway
     spec:
       containers:
-        - name: api-gateway-service
-          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:3cd8b29
+        - name: api-gateway-api
+          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:31fee49
           imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 9192
           env:
-            - name: HOST_IP
+            - name: HOST_UI
+              value: mystaysui.beta-app
+            - name: HOST_AUTH
               value: authserver.beta-app
+            - name: HOST_REGISTRY
+              value: service-registry.beta-app
