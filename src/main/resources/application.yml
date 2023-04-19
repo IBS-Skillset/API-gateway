@@ -1,5 +1,9 @@
 server:
   port: 9192
+  servlet:
+    context-path: /api-gateway
+    session:
+      timeout: 5
 
 spring:
   main:
