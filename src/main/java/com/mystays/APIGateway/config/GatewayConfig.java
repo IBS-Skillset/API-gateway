@@ -17,34 +17,50 @@ public class GatewayConfig {
 
 
     @Bean
-    public RouteLocator myRoutes(RouteLocatorBuilder routeLocatorBuilder)
-    {
+    public RouteLocator myRoutes(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
-                .route(p ->p.path("/auth-server/authenticate/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("authenticate").setFallbackUri("/authenticateFallback")))
+                .route(p -> p
+                        .path("/auth-server/authenticate/**")
+                        .filters(f -> f.circuitBreaker(c -> c.setName("authenticate").setFallbackUri("/authenticateFallback")))
                         .uri("lb://AUTHORIZATION-SERVER"))
-                .route(p ->p.path("/hotel-search-service/api/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback")))
+                .route(p -> p
+                        .path("/api-gateway/hotel-search-service/api/**")
+                        .filters(f -> f
+                                .circuitBreaker(c -> c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback"))
+                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://HOTEL-SEARCH-API"))
-                .route(p ->p.path("/hotel-book-service/api/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("HotelBookService").setFallbackUri("/hotelBookServiceFallback")))
+                .route(p -> p
+                        .path("/api-gateway/hotel-book-service/api/**")
+                        .filters(f -> f
+                                .circuitBreaker(c -> c.setName("HotelBookService").setFallbackUri("/hotelBookServiceFallback"))
+                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://HOTEL-BOOK-SERVICE"))
-                .route(p->p.path("/account/**")
+                .route(p -> p
+                        .path("/api-gateway/account/**")
+                        .filters(f -> f.rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://ACCOUNT-SERVICE"))
-                .route(p->p.path("/googleApi/**")
+                .route(p -> p
+                        .path("/api-gateway/googleApi/**")
+                        .filters(f -> f.rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://GOOGLE-API"))
-                .route(p->p.path("/book-query/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("HotelBookQuery").setFallbackUri("/hotelBookQueryFallback")))
+                .route(p -> p
+                        .path("/api-gateway/book-query/**")
+                        .filters(f -> f
+                                .circuitBreaker(c -> c.setName("HotelBookQuery").setFallbackUri("/hotelBookQueryFallback"))
+                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://HOTEL-BOOK-QUERY"))
-                .route(p->p.path("/hotel-book/**")
-                        .filters(f -> f.circuitBreaker(c->c.setName("HotelBookCmd").setFallbackUri("/hotelBookCmdFallback")))
+                .route(p -> p
+                        .path("/api-gateway/hotel-book/**")
+                        .filters(f -> f
+                                .circuitBreaker(c -> c.setName("HotelBookCmd").setFallbackUri("/hotelBookCmdFallback"))
+                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
                         .uri("lb://HOTEL-BOOK-CMD"))
                 .build();
     }
+
     @Bean
-    public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer()
-    {
-        return factory->factory.configureDefault(id ->new Resilience4JConfigBuilder(id)
+    public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
+        return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
                 .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .timeLimiterConfig(TimeLimiterConfig.custom()
                         .timeoutDuration(Duration.ofSeconds(50)).build()).build());
