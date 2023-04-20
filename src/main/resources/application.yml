@@ -58,7 +58,7 @@ resilience4j:
 
 eureka:
   instance:
-    host-name: api-gateway
+    hostname: api-gateway
     prefer-ip-address: false
     status-page-url-path: /actuator/info
     health-check-url-path: /actuator/health
