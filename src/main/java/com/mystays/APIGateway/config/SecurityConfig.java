@@ -17,7 +17,8 @@ public class SecurityConfig {
 
         http.csrf().disable().authorizeExchange()
                 .pathMatchers("/api-gateway/account/api/signup").permitAll()
-                .anyExchange().authenticated()
+                .pathMatchers("/api-gateway/**").authenticated()
+                //.anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
                 .opaqueToken();
