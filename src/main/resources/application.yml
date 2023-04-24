@@ -22,7 +22,6 @@ spring:
             allowedOrigins: "*"
             allowedHeaders: "*"
             allowedMethods: "*"
-            allow-credentials: true
   security:
     oauth2:
       resourceserver:
