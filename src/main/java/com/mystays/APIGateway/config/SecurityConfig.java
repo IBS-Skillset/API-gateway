@@ -15,7 +15,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 
-        http.csrf().disable().authorizeExchange()
+        /*http.csrf().disable().authorizeExchange()
                 .pathMatchers("/api-gateway/**").permitAll()
                 //.pathMatchers("/api-gateway/**").authenticated()
                 //.anyExchange().authenticated()
@@ -29,7 +29,7 @@ public class SecurityConfig {
             configuration.setAllowedMethods(List.of("*"));
             configuration.setAllowedHeaders(List.of("*"));
             return configuration;
-        });
+        });*/
 
         return http.build();
 
