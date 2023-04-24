@@ -8,6 +8,12 @@ metadata:
     app.kubernetes.io/name: api-gateway
 spec:
   replicas: 1
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: api-gateway
@@ -17,12 +23,22 @@ spec:
         app.kubernetes.io/name: api-gateway
     spec:
       containers:
-        - name: api-gateway-service
-          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:3cd8b29
+        - name: api-gateway-api
+          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:16faf17
           imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 9192
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "200m"
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
           env:
-            - name: HOST_IP
-              value: authserver.beta-app
+            - name: HOST_AUTH
+              value: authorization-server
+            - name: HOST_REGISTRY
+              value: service-registry
+  -- INSERT --

@@ -5,7 +5,7 @@ metadata:
   name: api-gateway
   namespace: beta-app
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 9192
       targetPort: 9192
