@@ -23,13 +23,13 @@ spring:
             allowedHeaders: "*"
             allowedMethods: "*"
             allow-credentials: true
-  security:
-    oauth2:
-      resourceserver:
-        opaquetoken:
-          introspection-uri: http://${HOST_AUTH:127.0.0.1}:9000/auth-server/oauth2/introspect
-          client-id: client
-          client-secret: secret
+  #security:
+   # oauth2:
+    #  resourceserver:
+     #   opaquetoken:
+      #    introspection-uri: http://${HOST_AUTH:127.0.0.1}:9000/auth-server/oauth2/introspect
+       #   client-id: client
+        #  client-secret: secret
 management:
   health:
     circuitbreakers:
