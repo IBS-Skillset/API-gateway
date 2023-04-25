@@ -14,6 +14,8 @@ import java.time.Duration;
 
 @Configuration
 public class GatewayConfig {
+    private static final String REGEX_PATH = "/api-gateway(?<segment>/?.*)";
+    private static final String REPLACEMENT_PATH = "/${segment}";
 
 
     @Bean
@@ -27,33 +29,33 @@ public class GatewayConfig {
                         .path("/api-gateway/hotel-search-service/api/**")
                         .filters(f -> f
                                 .circuitBreaker(c -> c.setName("HotelSearchService").setFallbackUri("/hotelSearchServiceFallback"))
-                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                                .rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://HOTEL-SEARCH-API"))
                 .route(p -> p
                         .path("/api-gateway/hotel-book-service/api/**")
                         .filters(f -> f
                                 .circuitBreaker(c -> c.setName("HotelBookService").setFallbackUri("/hotelBookServiceFallback"))
-                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                                .rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://HOTEL-BOOK-SERVICE"))
                 .route(p -> p
                         .path("/api-gateway/account/**")
-                        .filters(f -> f.rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                        .filters(f -> f.rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://ACCOUNT-SERVICE"))
                 .route(p -> p
                         .path("/api-gateway/googleApi/**")
-                        .filters(f -> f.rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                        .filters(f -> f.rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://GOOGLE-API"))
                 .route(p -> p
                         .path("/api-gateway/book-query/**")
                         .filters(f -> f
                                 .circuitBreaker(c -> c.setName("HotelBookQuery").setFallbackUri("/hotelBookQueryFallback"))
-                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                                .rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://HOTEL-BOOK-QUERY"))
                 .route(p -> p
                         .path("/api-gateway/hotel-book/**")
                         .filters(f -> f
                                 .circuitBreaker(c -> c.setName("HotelBookCmd").setFallbackUri("/hotelBookCmdFallback"))
-                                .rewritePath("/api-gateway(?<segment>/?.*)", "/${segment}"))
+                                .rewritePath(REGEX_PATH, REPLACEMENT_PATH))
                         .uri("lb://HOTEL-BOOK-CMD"))
                 .build();
     }
