@@ -1,5 +1,6 @@
 package com.mystays.APIGateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @EnableWebFluxSecurity
 public class SecurityConfig {
+
+    @Value("${host.ui}")
+    private String hostUri;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -24,7 +28,7 @@ public class SecurityConfig {
         http
                 .cors().configurationSource(request -> {
             CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(List.of("http://k8s-betaapp-ingressm-29790a68fa-1285978643.ap-south-1.elb.amazonaws.com"));
+            configuration.setAllowedOrigins(List.of(hostUri));
             configuration.setAllowedMethods(List.of("*"));
             configuration.setAllowedHeaders(List.of("*"));
             return configuration;
