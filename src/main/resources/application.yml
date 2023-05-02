@@ -21,10 +21,11 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "*"
+            #allowedOrigins: ${host.ui}
+            allowedOriginPatterns: "*"
             allowedHeaders: "*"
             allowedMethods: "*"
-            #allow-credentials: true
+            allow-credentials: true
   security:
     oauth2:
       resourceserver:
