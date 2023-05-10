@@ -29,7 +29,6 @@ public class SecurityConfig {
                 .cors().configurationSource(request -> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowedOrigins(List.of(hostUri));
-            configuration.setAllowedOriginPatterns(List.of("*"));
             configuration.setAllowedMethods(List.of("*"));
             configuration.setAllowedHeaders(List.of("*"));
             return configuration;
