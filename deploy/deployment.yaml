@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-api
-          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:16faf17
+          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/api-gateway:a74e1a8
           imagePullPolicy: Always
           ports:
             - name: http
