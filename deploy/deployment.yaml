@@ -38,10 +38,10 @@ spec:
               cpu: "500m"
           env:
             - name: HOST_UI
-                valueFrom:
-                  configMapKeyRef:
-                    name: ui-config
-                    key: HOST_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ui-config
+                  key: HOST_URL
             - name: HOST_AUTH
               value: authorization-server
             - name: HOST_REGISTRY
